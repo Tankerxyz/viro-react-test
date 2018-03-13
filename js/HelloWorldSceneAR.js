@@ -9,6 +9,8 @@ import {
   ViroText,
   ViroBox,
   ViroMaterials,
+  ViroARImageMarker,
+  ViroARTrackingTargets,
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
@@ -28,8 +30,12 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     return (
       <ViroARScene onTrackingInitialized={this._onInitialized} >
-        <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
-        <ViroBox position={[0, -.5, -1]} scale={[.3, .3, .1]} materials={["grid"]} />
+        <ViroARImageMarker
+          target={"targetOne"}
+          onAnchorFound={() => {console.log('found')}}
+          opacity={0.1} >
+          <ViroBox position={[0, .25, 0]} scale={[2, 2, 2]} />
+        </ViroARImageMarker>
       </ViroARScene>
     );
   }
@@ -45,6 +51,14 @@ export default class HelloWorldSceneAR extends Component {
 ViroMaterials.createMaterials({
   grid: {
     diffuseTexture: require('./res/grid_bg.jpg'),
+  },
+});
+
+ViroARTrackingTargets.createTargets({
+  "targetOne" : {
+    source : require('./res/qr.jpg'),
+    orientation : "Down",
+    physicalWidth : 0.07 // real world width in meters
   },
 });
 
