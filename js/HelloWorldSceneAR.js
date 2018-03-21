@@ -44,16 +44,35 @@ var MainScene = createReactClass({
           />
 
           <Viro3DObject
-            source={require('./res/icecreamman_anim/icecreamman_anim_a.vrx')}
-            resources={[require('./res/icecreamman_anim/icecreamman_diffuse.png'),
-              require('./res/icecreamman_anim/icecreamman_normal.png'),
-              require('./res/icecreamman_anim/icecreamman_specular.png')]}
+            source={require('./res/ichigo/ichigo_rigg.obj')}
+            resources={[
+              require('./res/ichigo/ichigo_rigg.mtl'),
+              // require('./res/ichigo/whiteBase_Color.png'),
+              // require('./res/ichigo/white.002_Height.png'),
+              // require('./res/ichigo/white.002_Metallic.png'),
+              // require('./res/ichigo/white.002_Mixed_AO.png'),
+              // require('./res/ichigo/white.002_Normal.png'),
+              require('./res/ichigo/white.002_Normal_OpenGL.png'),
+              // require('./res/ichigo/white.002_Roughness.png'),
+            ]}
+            materials={["ichigo"]}
             position={[0, 0, 0]}
-            scale={[.5, .5, .5]}
-            type="VRX"
-            onClick={this._onTappedIcecream}
-            animation={{name:"02", run:this.state.runAnimation, loop:true,}}
+            scale={[.07, .07, .07]}
+            type="OBJ"
+            highAccuracyGaze={true}
           />
+
+          {/*<Viro3DObject*/}
+            {/*source={require('./res/icecreamman_anim/icecreamman_anim_a.vrx')}*/}
+            {/*resources={[require('./res/icecreamman_anim/icecreamman_diffuse.png'),*/}
+              {/*require('./res/icecreamman_anim/icecreamman_normal.png'),*/}
+              {/*require('./res/icecreamman_anim/icecreamman_specular.png')]}*/}
+            {/*position={[0, 0, 0]}*/}
+            {/*scale={[.5, .5, .5]}*/}
+            {/*type="VRX"*/}
+            {/*onClick={this._onTappedIcecream}*/}
+            {/*animation={{name:"02", run:this.state.runAnimation, loop:true,}}*/}
+          {/*/>*/}
 
           <ViroSurface
             rotation={[-90, 0, 0]}
@@ -125,6 +144,19 @@ var MainScene = createReactClass({
     this.setState({
       runAnimation : !this.state.runAnimation,
     })
+  },
+});
+
+ViroMaterials.createMaterials({
+  ichigo: {
+    shininess: 2.0,
+    lightingModel: "Lambert",
+    diffuseTexture: require('./res/ichigo/white.002_Height.png'),
+    metalnessTexture: require('./res/ichigo/white.002_Metallic.png'),
+    normalTexture: require('./res/ichigo/white.002_Normal_OpenGL.png'),
+    roughnessTexture: require('./res/ichigo/white.002_Roughness.png'),
+    ambientOcclusionTexture: require('./res/ichigo/white.002_Mixed_AO.png'),
+    // specularTexture: require('./res/ichigo/s')
   },
 });
 

@@ -4,3 +4,8 @@ target 'ViroSample' do
   pod 'ViroReact', :path => '../node_modules/react-viro/ios/'
   pod 'ViroKit', :path => '../node_modules/react-viro/ios/dist/beta/ViroRenderer/'
 end
+
+# Hack to fix linker error between GVRSDK and React
+post_install do |installer|
+    system(". ./pod_post_install.sh")
+end
